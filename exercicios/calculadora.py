@@ -1,0 +1,66 @@
+def soma (a, b):
+    return a + b
+
+def subtracao (a, b):
+    return (a - b)
+
+def multiplicacao (a, b):
+    return (a * b)
+
+def divisao (a, b):
+    if b == 0:
+        return "Erro, não é possivel dividir por 0"
+    return (a / b)
+def obter_numero(mensagem):
+    while True:
+        try:
+            return float(input(mensagem))
+        except ValueError:
+            return "erro, digite um valor valido\n"
+        
+def main():
+    print("=" * 40)
+    print("         CALCULADORA INSANINHA ")
+    print("=" * 40)
+
+    operações = {
+        "1": ("soma    (+)", soma),
+        "2": ("subtração    (-)", subtracao),
+        "3": ("multiplicação    (x)", multiplicacao),
+        "4": ("divisão    (/)", divisao),
+        "5": ("sair", None),
+    }
+
+    while True:
+        print("\nescolha sua operação: ")
+        for chave, (nome, _) in operações.items():
+            print(f" [{chave}], {nome}")
+
+        escolha = input("Digite a opção desejada: ")
+
+        if escolha not in operações:
+            print(" Digite um opção válida: ")
+            continue
+        elif escolha == "5":
+            print("Até mais ;-; ")
+            break
+
+        nome_op, funcao = operações[escolha]
+        print(f"\n── {nome_op} ──")
+
+        a = obter_numero(" digite o primeiro número: ")
+        b = obter_numero(" digite o segundo número: ")
+
+        resultado = funcao(a, b)
+
+        if isinstance(resultado, str):
+            print(f"\n X {resultado} ")
+        else:
+            if resultado == int(resultado):
+                resultado = int(resultado)
+            print(f"o resultado é {resultado} ")
+
+        print("=" * 40)
+
+if __name__ == "__main__":
+    main()
